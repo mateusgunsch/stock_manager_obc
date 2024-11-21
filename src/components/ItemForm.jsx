@@ -16,7 +16,7 @@ export default function ItemForm({ itemToUpdate }) {
         category: ""
     }
     const [item, setItem] = useState(itemToUpdate ? itemToUpdate : defaultItem)
-    const { addItem } = useContext(StockContext)
+    const { addItem, updateItem } = useContext(StockContext)
     const inputRef = useRef(null)
 
     const handleChange = (ev) => {
@@ -31,13 +31,19 @@ export default function ItemForm({ itemToUpdate }) {
     const handleSubmit = (ev) => {
         ev.preventDefault()
         try {
-            const stockItem = new StockItem(item)
-            addItem(stockItem)
-            setItem(defaultItem)
-            alert("Item cadastrado com sucesso!")
-            inputRef.current.focus()
+            if (itemToUpdate) {
+                updateItem(itemToUpdate.id, item)
+                alert("Item atualizado com sucesso!")
+            } else {
+                const stockItem = new StockItem(item)
+                addItem(stockItem)
+                setItem(defaultItem)
+                alert("Item cadastrado com sucesso!")
+            }
         } catch (error) {
             console.log(error.message)
+        } finally {
+            inputRef.current.focus()
         }
     }
 
