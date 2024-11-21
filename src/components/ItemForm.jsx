@@ -30,7 +30,6 @@ export default function ItemForm({ itemToUpdate }) {
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
-
         try {
             const stockItem = new StockItem(item)
             addItem(stockItem)
@@ -114,9 +113,10 @@ export default function ItemForm({ itemToUpdate }) {
                     rows={6}
                     value={item.description}
                     onChange={handleChange}
+                    placeholder="..."
                 ></textarea>
             </div>
-            <button className="button is-primary is-large">
+            <button type="submit" className="button is-primary is-large">
                 Salvar
             </button>
         </form>

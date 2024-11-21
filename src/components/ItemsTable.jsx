@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { StockContext } from "../contexts/ConstStockContext";
+import DeleteButton from "./DeleteButton";
 
 export default function ItemsTable() {
     const{ items } = useContext(StockContext)
@@ -26,6 +27,7 @@ export default function ItemsTable() {
                         <td>
                             <Link to={`/items/${item.id}`} className="button is-primary is-small">Ver</Link>
                             <Link to={`/items/${item.id}/update`} className="button is-small">Atualizar</Link>
+                            <DeleteButton itemId={item.id} itemName={item.name} />
                         </td>
                     </tr>
                 ))}
